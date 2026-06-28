@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shantanu Nitin Kulkaarni — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #080808;
+    --white: #F5F3EE;
+    --accent: #E8FF47;
+    --accent2: #FF4747;
+    --gray1: #111111;
+    --gray2: #1A1A1A;
+    --gray3: #2A2A2A;
+    --gray4: #444444;
+    --gray5: #888888;
+    --gray6: #AAAAAA;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    background: rgba(8,8,8,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray3);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: var(--white);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 48px 80px;
+    position: relative;
+    border-bottom: 1px solid var(--gray3);
+    overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display);
+    font-size: clamp(120px, 20vw, 240px);
+    color: rgba(255,255,255,0.025);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: 8px;
+    user-select: none;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block; width: 24px; height: 1px;
+    background: var(--accent);
+  }
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(64px, 10vw, 128px);
+    line-height: 0.9;
+    letter-spacing: 3px;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .hero-name span { color: var(--accent); }
+  .hero-desc {
+    max-width: 560px;
+    font-size: 16px;
+    color: var(--gray6);
+    line-height: 1.7;
+    margin-bottom: 48px;
+  }
+  .hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent);
+    color: var(--black);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 14px 28px;
+    text-decoration: none;
+    transition: transform 0.15s, background 0.15s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-primary:hover { transform: translateY(-2px); background: #f0ff60; }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    padding: 13px 28px;
+    border: 1px solid var(--gray3);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--gray5); color: var(--accent); }
+  .hero-stats {
+    position: absolute; right: 48px; bottom: 80px;
+    display: flex; flex-direction: column; gap: 24px; align-items: flex-end;
+  }
+  .stat-item { text-align: right; }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 42px;
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: 2px;
+  }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray5);
+    margin-top: 2px;
+  }
+
+  /* SECTION COMMONS */
+  section { padding: 100px 48px; border-bottom: 1px solid var(--gray3); }
+  .section-header {
+    display: flex; align-items: baseline; gap: 20px;
+    margin-bottom: 64px;
+  }
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 72px);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 1;
+  }
+  .section-line {
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, var(--gray3), transparent);
+    margin-left: 20px;
+  }
+
+  /* PROJECTS */
+  .projects-grid { display: flex; flex-direction: column; gap: 2px; }
+
+  .project-card {
+    background: var(--gray1);
+    border: 1px solid var(--gray3);
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--accent);
+    transition: height 0.4s ease;
+  }
+  .project-card:hover { border-color: var(--gray4); }
+  .project-card:hover::before { height: 100%; }
+  .project-card.featured::before { background: var(--accent2); }
+
+  .project-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 32px;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .project-index {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--gray4);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .project-name {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 64px);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--white);
+    line-height: 1;
+  }
+  .project-accent { color: var(--accent); }
+  .project-status {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid var(--gray3);
+    color: var(--gray5);
+    background: var(--gray2);
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+  .project-status .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .project-tagline {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--gray6);
+    margin-bottom: 20px;
+    line-height: 1.5;
+    max-width: 680px;
+  }
+  .project-desc {
+    font-size: 14px;
+    color: var(--gray5);
+    line-height: 1.8;
+    max-width: 640px;
+    margin-bottom: 32px;
+  }
+
+  .project-built-with {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .project-built-note {
+    font-size: 13px;
+    color: var(--gray4);
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+
+  .project-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 36px;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border: 1px solid var(--gray3);
+    color: var(--gray5);
+    background: var(--gray2);
+  }
+  .tag.accent { border-color: rgba(232,255,71,0.3); color: var(--accent); background: rgba(232,255,71,0.05); }
+
+  .project-links { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .link-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .link-btn.primary {
+    background: var(--accent);
+    color: var(--black);
+  }
+  .link-btn.primary:hover { background: #f0ff60; transform: translateY(-1px); }
+  .link-btn.secondary {
+    border: 1px solid var(--gray3);
+    color: var(--gray5);
+  }
+  .link-btn.secondary:hover { border-color: var(--gray5); color: var(--white); }
+  .link-btn.disabled {
+    border: 1px solid var(--gray3);
+    color: var(--gray4);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .project-bg-num {
+    position: absolute; right: 32px; bottom: -20px;
+    font-family: var(--font-display);
+    font-size: 180px;
+    color: rgba(255,255,255,0.02);
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+  }
+
+  /* PROMPT ENGINEERING */
+  .prompts-intro {
+    max-width: 600px;
+    font-size: 15px;
+    color: var(--gray5);
+    line-height: 1.8;
+    margin-bottom: 56px;
+  }
+  .prompts-grid { display: flex; flex-direction: column; gap: 24px; }
+  .prompt-card {
+    border: 1px solid var(--gray3);
+    background: var(--gray1);
+    overflow: hidden;
+  }
+  .prompt-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--gray3);
+    background: var(--gray2);
+    flex-wrap: wrap; gap: 12px;
+  }
+  .prompt-header-left { display: flex; align-items: center; gap: 16px; }
+  .prompt-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    background: rgba(232,255,71,0.1);
+    border: 1px solid rgba(232,255,71,0.2);
+    color: var(--accent);
+  }
+  .prompt-project {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--gray5);
+    letter-spacing: 0.5px;
+  }
+  .prompt-type {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gray4);
+    padding: 4px 10px;
+    border: 1px solid var(--gray3);
+  }
+  .prompt-body { padding: 28px; }
+  .prompt-objective {
+    font-size: 13px;
+    color: var(--gray5);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-family: var(--font-mono);
+  }
+  .prompt-goal {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  .prompt-block {
+    background: #0D0D0D;
+    border: 1px solid var(--gray3);
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: #C8C8C8;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .prompt-block.response {
+    border-left-color: var(--gray4);
+    color: var(--gray5);
+    font-family: var(--font-body);
+    font-size: 13px;
+  }
+  .prompt-block-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray4);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .prompt-block-label::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--gray3);
+  }
+  .prompt-technique {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 16px 0;
+    border-top: 1px solid var(--gray3);
+    margin-top: 4px;
+  }
+  .technique-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+    padding-top: 2px;
+    min-width: 140px;
+  }
+  .technique-desc {
+    font-size: 13px;
+    color: var(--gray5);
+    line-height: 1.6;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .about-text {
+    font-size: 16px;
+    color: var(--gray6);
+    line-height: 1.9;
+  }
+  .about-text p + p { margin-top: 20px; }
+  .stack-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .stack-items { display: flex; flex-direction: column; }
+  .stack-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--gray3);
+  }
+  .stack-name { font-size: 14px; color: var(--white); }
+  .stack-role { font-family: var(--font-mono); font-size: 11px; color: var(--gray5); }
+
+  /* FOOTER */
+  footer {
+    padding: 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .footer-name {
+    font-family: var(--font-display);
+    font-size: 20px;
+    letter-spacing: 4px;
+    color: var(--gray4);
+    text-transform: uppercase;
+  }
+  .footer-note {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--gray4);
+    letter-spacing: 0.5px;
+  }
+  .footer-github {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--gray5);
+    text-decoration: none;
+    padding: 10px 16px;
+    border: 1px solid var(--gray3);
+    transition: all 0.2s;
+  }
+  .footer-github:hover { border-color: var(--accent); color: var(--accent); }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 24px; }
+    .hero, section, footer { padding-left: 24px; padding-right: 24px; }
+    .hero { padding-bottom: 140px; }
+    .hero-stats { right: 24px; flex-direction: row; gap: 32px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .project-card { padding: 28px; }
+    .prompt-body { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Shantanu Kulkaarni</a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#prompts">Prompts</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="https://github.com/shantanunitinkulkaarni-ts" target="_blank">GitHub ↗</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding-top: 64px;">
+  <div class="hero-bg-text">BUILD</div>
+  <div class="hero-tag">AI Builder & Product Creator</div>
+  <h1 class="hero-name">
+    Shantanu<br>
+    Nitin <span>Kulkaarni</span>
+  </h1>
+  <p class="hero-desc">
+    I build AI-powered products from scratch — designing, prompting, and shipping tools that automate real business problems. From WhatsApp nurturing agents to AI recruitment platforms.
+  </p>
+  <div class="hero-actions">
+    <a href="#projects" class="btn-primary">View Projects ↓</a>
+    <a href="https://github.com/shantanunitinkulkaarni-ts" target="_blank" class="btn-ghost">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      GitHub
+    </a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">AI Products</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">In Progress</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- LeadNest -->
+    <div class="project-card">
+      <div class="project-bg-num">01</div>
+      <div class="project-top">
+        <div>
+          <div class="project-index">Project / 01</div>
+          <div class="project-name">Lead<span class="project-accent">Nest</span></div>
+        </div>
+        <div class="project-status"><span class="dot"></span>In Development</div>
+      </div>
+      <p class="project-tagline">AI-powered WhatsApp client nurturing agent designed to increase ROI.</p>
+      <p class="project-desc">
+        LeadNest automates client engagement on WhatsApp using conversational AI — nurturing leads, following up intelligently, and converting prospects without manual effort. Built to give businesses a measurable return on every conversation.
+      </p>
+      <div class="project-tags">
+        <span class="tag accent">AI Agent</span>
+        <span class="tag">WhatsApp API</span>
+        <span class="tag">Lead Nurturing</span>
+        <span class="tag">GCP</span>
+        <span class="tag">ROI Automation</span>
+      </div>
+      <div class="project-links">
+        <a href="https://leadnest-629032564012.us-central1.run.app/dashboard" target="_blank" class="link-btn primary">Live Preview ↗</a>
+        <a href="https://github.com/shantanunitinkulkaarni-ts" target="_blank" class="link-btn secondary">GitHub →</a>
+      </div>
+    </div>
+
+    <!-- TalentSwype -->
+    <div class="project-card featured">
+      <div class="project-bg-num">02</div>
+      <div class="project-top">
+        <div>
+          <div class="project-index">Project / 02</div>
+          <div class="project-name">Talent<span class="project-accent" style="color:#FF4747">Swype</span></div>
+        </div>
+        <div class="project-status"><span class="dot" style="background:var(--accent2)"></span>In Development</div>
+      </div>
+      <p class="project-tagline">AI-powered recruitment marketplace built for precision hiring.</p>
+      <p class="project-desc">
+        TalentSwype gives HRs and recruiters a full-stack AI toolkit — intelligent candidate matching, AI-powered interview systems, and workflow automation that cuts time-to-hire dramatically. Built to replace guesswork with precision.
+      </p>
+      <div class="project-tags">
+        <span class="tag" style="border-color:rgba(255,71,71,0.3);color:var(--accent2);background:rgba(255,71,71,0.05)">AI Powered</span>
+        <span class="tag">Recruitment</span>
+        <span class="tag">AI Interviews</span>
+        <span class="tag">Vercel</span>
+        <span class="tag">Marketplace</span>
+      </div>
+      <div class="project-links">
+        <a href="https://gravity-xi-nine.vercel.app/" target="_blank" class="link-btn primary" style="background:var(--accent2);color:var(--white);">Live Preview ↗</a>
+        <a href="https://github.com/shantanunitinkulkaarni-ts" target="_blank" class="link-btn secondary">GitHub →</a>
+      </div>
+    </div>
+
+    <!-- MyAI -->
+    <div class="project-card">
+      <div class="project-bg-num">03</div>
+      <div class="project-top">
+        <div>
+          <div class="project-index">Project / 03</div>
+          <div class="project-name">My<span class="project-accent">AI</span></div>
+        </div>
+        <div class="project-status"><span class="dot"></span>In Development · Local</div>
+      </div>
+      <p class="project-tagline">A personal AI-powered IDE and coding engine for production-ready software.</p>
+      <p class="project-desc">
+        MyAI is the engine behind LeadNest and TalentSwype. An IDE-type tool that can architect, write, and iterate on high-quality, production-ready applications — powered by a multi-model pipeline combining Qwen, Claude Haiku, and Claude Sonnet via API. The result is a coding co-pilot that actually ships.
+      </p>
+      <div class="project-built-with">&#9889; Powers these projects</div>
+      <div class="project-built-note">LeadNest and TalentSwype were both significantly built using MyAI — making this the backbone of the entire portfolio.</div>
+      <div class="project-tags">
+        <span class="tag accent">Multi-Model</span>
+        <span class="tag">Qwen</span>
+        <span class="tag">Claude Haiku</span>
+        <span class="tag">Claude Sonnet</span>
+        <span class="tag">IDE Tool</span>
+        <span class="tag">Code Generation</span>
+      </div>
+      <div class="project-links">
+        <span class="link-btn disabled">&#128421; Running Locally</span>
+        <a href="https://github.com/shantanunitinkulkaarni-ts" target="_blank" class="link-btn secondary">GitHub →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROMPT ENGINEERING -->
+<section id="prompts">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Prompt Engineering</h2>
+    <div class="section-line"></div>
+  </div>
+  <p class="prompts-intro">
+    A selection of real prompt engineering work used to shape these products — from system prompt architecture to iterative refinement. These are the techniques that turned rough ideas into working AI behaviour.
+  </p>
+
+  <div class="prompts-grid">
+
+    <!-- Prompt 1 -->
+    <div class="prompt-card">
+      <div class="prompt-header">
+        <div class="prompt-header-left">
+          <span class="prompt-label">PE — 01</span>
+          <span class="prompt-project">LeadNest</span>
+        </div>
+        <span class="prompt-type">System Prompt Design</span>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-objective">Objective</div>
+        <div class="prompt-goal">Define a persistent WhatsApp agent persona that nurtures leads without sounding like a bot.</div>
+        <div class="prompt-block-label">System Prompt</div>
+        <div class="prompt-block">You are Aria, a warm and professional client success assistant for [Business Name].
+
+Your role is to nurture leads through WhatsApp by building genuine rapport, understanding their needs, and guiding them toward a decision — without being pushy.
+
+Rules:
+- Always greet by name when available.
+- Mirror the user's message length: short reply = short response.
+- Never mention you are an AI unless directly asked.
+- If a user is cold or unresponsive, wait 24h before a single follow-up.
+- Escalate to a human agent if: the user expresses frustration, asks for a manager, or the deal value exceeds [threshold].
+
+Tone: Confident, friendly, concise. Think "trusted advisor", not "sales rep".</div>
+        <div class="prompt-technique">
+          <span class="technique-label">Technique Used</span>
+          <span class="technique-desc">Persona anchoring + conditional escalation logic + tone constraint. Keeps the agent consistent across thousands of conversations without manual oversight.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prompt 2 -->
+    <div class="prompt-card">
+      <div class="prompt-header">
+        <div class="prompt-header-left">
+          <span class="prompt-label">PE — 02</span>
+          <span class="prompt-project">TalentSwype</span>
+        </div>
+        <span class="prompt-type">Structured Output / JSON</span>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-objective">Objective</div>
+        <div class="prompt-goal">Extract structured candidate evaluation data from an AI interview transcript.</div>
+        <div class="prompt-block-label">Prompt</div>
+        <div class="prompt-block">You are an expert talent evaluator. Analyse the following interview transcript and return a structured JSON evaluation.
+
+Transcript:
+"""
+{transcript}
+"""
+
+Return ONLY valid JSON — no explanation, no markdown. Schema:
+{
+  "overall_score": 0-100,
+  "communication": { "score": 0-10, "notes": "..." },
+  "technical_depth": { "score": 0-10, "notes": "..." },
+  "culture_fit": { "score": 0-10, "notes": "..." },
+  "red_flags": ["..."],
+  "hire_recommendation": "strong_yes | yes | maybe | no",
+  "summary": "2-sentence summary for the hiring manager"
+}</div>
+        <div class="prompt-block-label">Example Output</div>
+        <div class="prompt-block response">{
+  "overall_score": 82,
+  "communication": { "score": 8, "notes": "Clear and structured answers, good active listening" },
+  "technical_depth": { "score": 7, "notes": "Solid fundamentals, limited experience with distributed systems" },
+  "culture_fit": { "score": 9, "notes": "Showed strong alignment with ownership and growth values" },
+  "red_flags": ["Gap in employment unexplained", "Vague on team conflict resolution"],
+  "hire_recommendation": "yes",
+  "summary": "Strong candidate with good soft skills and cultural alignment. Recommend a technical deep-dive on systems design before final offer."
+}</div>
+        <div class="prompt-technique">
+          <span class="technique-label">Technique Used</span>
+          <span class="technique-desc">Strict JSON-mode prompting with explicit schema definition. Eliminates hallucinated formatting and makes AI output directly parseable by the TalentSwype frontend.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prompt 3 -->
+    <div class="prompt-card">
+      <div class="prompt-header">
+        <div class="prompt-header-left">
+          <span class="prompt-label">PE — 03</span>
+          <span class="prompt-project">MyAI</span>
+        </div>
+        <span class="prompt-type">Chain-of-Thought / Code Generation</span>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-objective">Objective</div>
+        <div class="prompt-goal">Instruct MyAI to plan before coding — reducing hallucinated logic in complex features.</div>
+        <div class="prompt-block-label">Prompt Template</div>
+        <div class="prompt-block">You are a senior software engineer building production-grade code.
+
+Before writing any code, think step by step:
+1. Restate what the feature needs to do in plain English.
+2. Identify edge cases and failure points.
+3. Choose the simplest architecture that solves the problem.
+4. Only then write the code.
+
+Feature request:
+"{user_feature_request}"
+
+Constraints:
+- Stack: {stack}
+- Must be production-ready (error handling, input validation, no hardcoded values)
+- Output: working code + inline comments explaining non-obvious logic
+- If any assumption is made, state it clearly above the code block.</div>
+        <div class="prompt-technique">
+          <span class="technique-label">Technique Used</span>
+          <span class="technique-desc">Chain-of-thought scaffolding before code generation. Forces the model to reason about architecture first — measurably reduced debugging time across LeadNest and TalentSwype builds.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prompt 4 -->
+    <div class="prompt-card">
+      <div class="prompt-header">
+        <div class="prompt-header-left">
+          <span class="prompt-label">PE — 04</span>
+          <span class="prompt-project">LeadNest x TalentSwype</span>
+        </div>
+        <span class="prompt-type">Iterative Refinement</span>
+      </div>
+      <div class="prompt-body">
+        <div class="prompt-objective">Objective</div>
+        <div class="prompt-goal">Refine an underperforming AI response by giving the model explicit failure feedback.</div>
+        <div class="prompt-block-label">Refinement Prompt</div>
+        <div class="prompt-block">The previous output didn't meet requirements. Here is specific feedback:
+
+PROBLEM: The response was too long and generic — it didn't reference the user's specific situation.
+EXPECTED: A reply under 3 sentences that acknowledges their exact concern and offers one clear next step.
+WHAT TO AVOID: Filler phrases ("Great question!", "I understand your concern"), vague CTAs ("Let me know if you need anything").
+
+Now rewrite the response for this input:
+User message: "{user_message}"
+Context: {context}
+
+Rewrite only. No explanation.</div>
+        <div class="prompt-block-label">Before vs After</div>
+        <div class="prompt-block response">BEFORE: "Great question! I completely understand your concern about pricing. We have a number of flexible plans available that might work for your needs. I'd be happy to walk you through them whenever you're ready. Just let me know!"
+
+AFTER: "Our growth plan runs at ₹4,999/month and covers everything you mentioned — including the API access. Want me to send over a quick breakdown so you can compare?"</div>
+        <div class="prompt-technique">
+          <span class="technique-label">Technique Used</span>
+          <span class="technique-desc">Failure-mode prompting — explicitly telling the model what went wrong and what not to repeat. More effective than rewriting the original prompt from scratch, and faster to iterate in production.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">About</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm Shantanu Nitin Kulkaarni — a non-technical founder and AI builder who moves fast by working smart. I don't write code by hand. I architect products, write precise prompts, and use AI to ship real software.</p>
+      <p>My approach is simple: identify a genuine business problem, design the right AI behaviour to solve it, and use tools like MyAI to build the product end-to-end. No gatekeeping. No waiting on a dev team.</p>
+      <p>Every product in this portfolio was conceived, designed, and built by me — using AI as the execution layer. That's the future of building, and I'm already doing it.</p>
+    </div>
+    <div class="about-stack">
+      <div class="stack-title">Tools & Stack</div>
+      <div class="stack-items">
+        <div class="stack-item"><span class="stack-name">Claude Sonnet & Haiku</span><span class="stack-role">Core AI Engine</span></div>
+        <div class="stack-item"><span class="stack-name">Qwen</span><span class="stack-role">Code Generation</span></div>
+        <div class="stack-item"><span class="stack-name">MyAI IDE</span><span class="stack-role">Build Tool</span></div>
+        <div class="stack-item"><span class="stack-name">Google Cloud Platform</span><span class="stack-role">Deployment</span></div>
+        <div class="stack-item"><span class="stack-name">Netlify / Vercel</span><span class="stack-role">Frontend Hosting</span></div>
+        <div class="stack-item"><span class="stack-name">WhatsApp Business API</span><span class="stack-role">LeadNest</span></div>
+        <div class="stack-item"><span class="stack-name">Prompt Engineering</span><span class="stack-role">Core Skill</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Shantanu Nitin Kulkaarni</div>
+  <div class="footer-note">Built with AI. Designed with intent. &copy; 2025 Shantanu Nitin Kulkaarni</div>
+  <a href="https://github.com/shantanunitinkulkaarni-ts" target="_blank" class="footer-github">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+    github.com/shantanunitinkulkaarni-ts
+  </a>
+</footer>
+
+</body>
+</html>
